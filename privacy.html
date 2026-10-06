@@ -49,15 +49,16 @@
       <h2>2. What we collect</h2>
       <p>Our relay holds what it needs to sign you in, deliver data and limit abuse:</p>
       <ul>
-        <li><strong>Email address.</strong> Used to sign you in with a one-time code, to deliver invitations you send or receive, and to contact you about your account. When someone invites an address to a household, the relay keeps that address and which keep it's for until the invitation is accepted, withdrawn or expires.</li>
-        <li><strong>Account and device identifiers.</strong> Random identifiers for your account and for each app install you sign in from, the public keys your devices use, which app each install is, and when an account or device was last active.</li>
+        <li><strong>Email address.</strong> Used to sign you in with a one-time code, to deliver invitations you send or receive, and to contact you about your account. Hearth Cmd's emails come from <code>hearth@sourcecmd.com</code>. When someone invites an address to a household, the relay keeps that address and which keep it's for until the invitation is accepted, withdrawn or expires.</li>
+        <li><strong>Account and device identifiers.</strong> Random identifiers for your account and for each app install you sign in from, the public keys your devices use, which app each install is, and the day an account or device was last active.</li>
+        <li><strong>Device checks.</strong> The app uses Apple's App Attest and DeviceCheck so the relay can check it's talking to a genuine install, typically when you sign in, invite someone or link a device (not on each message). DeviceCheck may also be used to keep a ban in place if the app is reinstalled on the same phone.</li>
         <li><strong>Push notification tokens.</strong> A token from Apple for each device, used to deliver notifications. Notification contents are generally encrypted on the sending side so that only your device can show them.</li>
         <li><strong>Your keep's registration.</strong> That you run a keep, its public key, its software version, and when it was last seen. If you turn on health reports, your keep also sends content-free diagnostics (such as version, uptime and error counts by type).</li>
         <li><strong>Who may reach which keep.</strong> Your keep tells the relay which accounts may connect to it, so the relay can route members' apps to it. The relay isn't told your household's name or its members' names.</li>
-        <li><strong>Encrypted data held for delivery.</strong> When a device or your keep is offline, the relay holds encrypted data until it can be delivered: messages between apps and keeps for up to about 7 days, and household chat messages and attachments for up to about 30 days. The relay can see the size of each item, when it was sent, which account sent it, and who belongs to each conversation, but it is designed not to be able to read the contents.</li>
+        <li><strong>Encrypted data held for delivery.</strong> When a device or your keep is offline, the relay holds encrypted data until it can be delivered: messages between apps and keeps for up to about 7 days, and household chat messages and attachments for up to about 30 days. The relay can see the size of each item (padded so sizes reveal less), when it was sent, which account sent it, and who belongs to each conversation, but it is designed not to be able to read the contents.</li>
         <li><strong>Delivery traces.</strong> Identifiers, outcomes, sizes and timings of deliveries, kept for 14 days so we can answer "why didn't this arrive?".</li>
-        <li><strong>Abuse controls.</strong> To limit spam, the relay caps how many first contacts an account can make in a day, counted from the message requests it holds.</li>
-        <li><strong>Logs.</strong> Our servers keep operational logs for a limited period. They are designed to hold identifiers, types, timings and error codes, not the contents of your messages.</li>
+        <li><strong>Abuse controls.</strong> To limit spam, the relay keeps daily counts for each account of first contacts made, and how many were accepted, declined or blocked, for up to about 90 days, and uses them to limit how many new contacts an account can make.</li>
+        <li><strong>Logs.</strong> Our servers keep operational logs for a limited period. They are designed to hold identifiers, types, timings and error codes, not the contents of your messages, and our web server's logs are designed to leave out IP addresses.</li>
       </ul>
 
       <h2>3. What stays on your devices and your keep</h2>
@@ -73,7 +74,7 @@
       <p>We don't sell your information, and the app is designed without advertising, third-party analytics or tracking. Information reaches others in these ways:</p>
       <ul>
         <li><strong>AI model providers you choose.</strong> Your agents send their work to the providers you set up, under your own accounts and their terms. Whether a provider keeps or trains on that content depends on your arrangement with them, not on us.</li>
-        <li><strong>Service providers who help us run the relay:</strong> currently Akamai (Linode) for servers and file storage, Brevo for sending email (your address and sign-in codes), and Apple for push notifications (push tokens and encrypted notification contents).</li>
+        <li><strong>Service providers who help us run the relay:</strong> currently Akamai (Linode) for servers and file storage, Brevo for sending email (your address and sign-in codes), and Apple for push notifications (push tokens and encrypted notification contents) and for device checks (App Attest and DeviceCheck).</li>
         <li><strong>Services you connect.</strong> If you connect an account such as a calendar, your keep exchanges data with that service directly, under your account with it.</li>
         <li><strong>When required.</strong> We may disclose information we hold if we believe the law requires it, or to protect people's safety or the service. What we hold is limited to what this policy describes.</li>
       </ul>
@@ -82,16 +83,18 @@
       <ul>
         <li>Your email address, identifiers and keep registration: while your account exists.</li>
         <li>Invitations: until accepted, withdrawn or expired.</li>
+        <li>Sign-in codes: typically removed a day after they expire. Sign-in sessions: removed when they expire.</li>
+        <li>Abuse counts: up to about 90 days.</li>
         <li>Encrypted data waiting for delivery: up to about 7 days (between apps and keeps) or about 30 days (household chat and attachments).</li>
         <li>Delivery traces: 14 days.</li>
-        <li>Logs: for a limited period.</li>
-        <li>Backups of the relay's database: for a limited period (currently up to about 90 days).</li>
+        <li>Logs: for a limited period, generally up to about 7 days for our web server and about 14 days for system logs.</li>
+        <li>Backups of the relay's database: generally up to about 30 days.</li>
         <li>Your keep's data: on your computer, for as long as you keep it there.</li>
       </ul>
 
       <h2 id="delete-account">6. Deleting your account</h2>
-      <p>You can ask us to delete your account by emailing <a href="mailto:support@vergelabs.org">support@vergelabs.org</a> from the address you sign in with, and in the app where available. Deleting your account removes it from the relay: your email address, devices and push tokens, and any data waiting to be delivered to you.</p>
-      <p><strong>Your keep isn't deleted with your account.</strong> It and its data stay on your computer until you remove them there. Messages you sent remain on the devices of the people who received them. Deleted data may remain in our backups for a limited period (currently up to about 90 days) before it's gone.</p>
+      <p>In Hearth Cmd, open the <strong>Account</strong> tab and tap <strong>Delete account</strong>, then confirm with a code sent to your email address. You can also ask us to delete it by emailing <a href="mailto:support@vergelabs.org">support@vergelabs.org</a> from the address you sign in with. Deleting your account removes it from the relay: your email address, devices and push tokens, and any data waiting to be delivered to you.</p>
+      <p><strong>Your keep isn't deleted with your account.</strong> It and its data stay on your computer until you remove them there. Messages you sent remain on the devices of the people who received them. Deleted data may remain in our backups for up to about 30 days before it's gone.</p>
 
       <h2>7. Children</h2>
       <p>Hearth Cmd is not intended for anyone under 13, or under the minimum age where they live if that is higher. We don't knowingly collect information from children under that age. If you believe a child has signed up, contact us and we'll take steps to remove their account.</p>
