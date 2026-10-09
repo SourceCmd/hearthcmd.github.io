@@ -55,7 +55,7 @@
         <li><strong>Push notification tokens.</strong> A token from Apple for each device, used to deliver notifications. Notification contents are generally encrypted on the sending side so that only your device can show them.</li>
         <li><strong>Your keep's registration.</strong> That you run a keep, its public key, its software version, and when it was last seen. If you turn on health reports, your keep also sends content-free diagnostics (such as version, uptime and error counts by type).</li>
         <li><strong>Who may reach which keep.</strong> Your keep tells the relay which accounts may connect to it, so the relay can route members' apps to it. The relay isn't told your household's name or its members' names.</li>
-        <li><strong>Encrypted data held for delivery.</strong> When a device or your keep is offline, the relay holds encrypted data until it can be delivered: messages between apps and keeps for up to about 7 days, and household chat messages and attachments for up to about 30 days. The relay can see the size of each item (padded so sizes reveal less), when it was sent, which account sent it, and who belongs to each conversation, but it is designed not to be able to read the contents.</li>
+        <li><strong>Encrypted data held for delivery.</strong> When a device or your keep is offline, the relay holds encrypted data until it can be delivered: messages between apps and keeps for up to about 7 days, and household chat messages and attachments for up to about 90 days. The relay can see the size of each item (padded so sizes reveal less), when it was sent, which account sent it, and who belongs to each conversation, but it is designed not to be able to read the contents.</li>
         <li><strong>Delivery traces.</strong> Identifiers, outcomes, sizes and timings of deliveries, kept for 14 days so we can answer "why didn't this arrive?".</li>
         <li><strong>Abuse controls.</strong> To limit spam, the relay keeps daily counts for each account of first contacts made, and how many were accepted, declined or blocked, for up to about 90 days, and uses them to limit how many new contacts an account can make.</li>
         <li><strong>Logs.</strong> Our servers keep operational logs for a limited period. They are designed to hold identifiers, types, timings and error codes, not the contents of your messages, and our web server's logs are designed to leave out IP addresses.</li>
@@ -85,7 +85,7 @@
         <li>Invitations: until accepted, withdrawn or expired.</li>
         <li>Sign-in codes: typically removed a day after they expire. Sign-in sessions: removed when they expire.</li>
         <li>Abuse counts: up to about 90 days.</li>
-        <li>Encrypted data waiting for delivery: up to about 7 days (between apps and keeps) or about 30 days (household chat and attachments).</li>
+        <li>Encrypted data waiting for delivery: up to about 7 days (between apps and keeps) or about 90 days (household chat and attachments).</li>
         <li>Delivery traces: 14 days.</li>
         <li>Logs: for a limited period, generally up to about 7 days for our web server and about 14 days for system logs.</li>
         <li>Backups of the relay's database: generally up to about 30 days.</li>
