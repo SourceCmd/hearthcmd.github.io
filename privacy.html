@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy - Hearth</title>
+  <title>Privacy Policy - Hearth Cmd</title>
   <link rel="icon" type="image/svg+xml" href="hearthcmd.svg">
   <link rel="apple-touch-icon" href="hearthcmd-180.png">
   <link rel="stylesheet" href="style.css">
@@ -32,150 +32,84 @@
   <div class="legal">
     <div class="container">
       <h1>Privacy Policy</h1>
-      <p class="last-updated">Last updated: September 1, 2026</p>
+      <p class="last-updated">Effective: [EFFECTIVE DATE]</p>
 
-      <p>Hearth is operated by Verge Labs. This policy explains what data we collect, why we collect it, and your rights over it.</p>
+      <p>Hearth Cmd is an app for households and their AI agents, made by Verge Labs LLC ("we", "us"). This policy explains what information is collected when you use Hearth Cmd, why, how long it's kept, and the choices you have. It covers the Hearth Cmd app, the relay that connects it (at <code>relaycmd.com</code>), and this website.</p>
 
-      <h2>1. Data We Collect</h2>
-      <p>We only collect what's necessary to run the Service:</p>
+      <h2>1. How Hearth Cmd is designed</h2>
+      <p>Hearth Cmd is built so that <strong>your data lives on your machine</strong>, not on our servers:</p>
       <ul>
-        <li><strong>Email address.</strong> Used to verify your identity via one-time passcode (OTP), to send household invitations, and occasionally to contact you about your account. If you invite someone to your household, their email is stored until the invitation is accepted, revoked, or expires.</li>
-        <li><strong>Account identifiers.</strong> A randomly generated UUID identifies your user account. Separate UUIDs identify your household, the computers you enroll, the agents you create, and the devices you sign in from. These are not linked to your Apple ID, Google account, or any advertising identifier.</li>
-        <li><strong>Display name (optional).</strong> If you set a name in your profile, it's stored so household members can identify each other.</li>
-        <li><strong>Device identifier and secret.</strong> A UUID and cryptographic secret generated on first sign-in are stored in your device's secure storage (iCloud Keychain on iOS, Android Keystore on Android). They authenticate your app to the relay server. Only a hashed version of the secret is ever stored on the server.</li>
-        <li><strong>Push notification token.</strong> A token from Apple (APNs) or Google (FCM) used solely to deliver notifications to your device. It doesn't identify you personally.</li>
-        <li><strong>Household and agent configuration.</strong> Names and settings you create for your household, enrolled computers, agent configurations, and working directories are stored on the server. This includes folder paths you designate for agents to work in.</li>
-        <li><strong>Permission request data.</strong> When an agent asks to take an action, the details of that request (what tool, what input) are relayed through our server to your device. Your response (Allow / Deny / Always Allow) and the timestamp are logged for operational and audit purposes.</li>
-        <li><strong>Auto-approve rules.</strong> Rules that allow certain actions to proceed automatically — created by tapping "Always Allow," through direct rule management, or via plugin installation — are stored on the server and scoped to the specific agent they apply to. You can view and delete them at any time.</li>
-        <li><strong>Subscription data.</strong> Hearth is currently free. If paid features are offered in the future and you purchase one, the transaction ID, product ID, and status from Apple or Google would be stored to verify your entitlement. We never receive your payment details.</li>
-        <li><strong>Agent activity data.</strong> While an agent is running, its step-by-step activity (tool calls, file edits, command output) streams through our server in real time to your device. This data is only held in memory during transit &mdash; it is never written to disk or stored on our servers.</li>
-        <li><strong>Chat messages.</strong> Hearth includes chat rooms where household members (and agents) can exchange messages. The content of those messages, along with the sender name, room, and timestamp, is stored on our servers for as long as your account is active. Messages you delete are soft-deleted (marked as removed) and are purged from active views, but may remain in the database for a short period before permanent removal. Agent-to-chat messages (where an agent posts into a chat room) are stored the same way as human messages.</li>
-        <li><strong>OTP request IP address.</strong> Logged briefly for rate-limiting abuse on the login endpoint. Not used for tracking or analytics.</li>
-        <li><strong>Hearth CLI.</strong> The CLI runs entirely on your computer. It stores credentials locally in <code>~/.hearth/credentials</code> and communicates with the relay server on your behalf. It does not send any additional data to our servers beyond what the app does.</li>
-        <li><strong>Google OAuth credentials (optional).</strong> If you connect a Google account to use Google Calendar, Drive, or Contacts integrations, we store an OAuth refresh token on the server. It's encrypted to your specific computer's public key (X25519 + ChaCha20-Poly1305), so only the Hearth daemon on that computer can decrypt it. Short-lived access tokens are derived on demand and used only for the specific API call in progress. We also store your Google account email as a label so you know which account is connected.</li>
-        <li><strong>Voice input (optional).</strong> If you connect a voice assistant (such as a Home Assistant voice satellite) to Hearth, the <em>text transcript</em> of what you say is routed to the agent you designate. The wake word and speech-to-text run <strong>on your own hardware in your home</strong> &mdash; we never receive audio recordings. What reaches our servers is text, handled the same way as an agent's live activity stream: relayed in memory to the designated agent and never written to our database as a stored message. See <a href="#voice">Voice and Home Assistant</a> below.</li>
+        <li><strong>Your keep holds your household.</strong> A keep is the Keep Cmd software running on a computer you own. It holds your household's data in a database on that computer: its members, agents, the agents' conversations and memory, rules and approvals, screens, and the credentials for any accounts you connect. We don't operate your keep, and it is designed so that we can't read what it holds.</li>
+        <li><strong>The relay delivers.</strong> When your phone and your keep aren't on the same network, they reach each other through our relay. Traffic between your app and your keep is end-to-end encrypted by design, so the relay carries data it isn't able to read. On your home network, the app may connect to your keep directly.</li>
+        <li><strong>Household chat uses Loop Cmd's encrypted conversations.</strong> Chat rooms in Hearth Cmd are end-to-end encrypted group conversations on the same system as our Loop Cmd app. Your keep is a member of each of your household's rooms, so that it can keep each room's members in step with the household's. This means your keep, and so whoever controls the computer it runs on, can read household chat.</li>
+        <li><strong>Agents talk to AI model providers.</strong> Your agents run on your keep and use the AI model providers you choose (such as Anthropic or OpenAI), under your own accounts with them. What an agent works on, including messages people send it, is sent to that provider. See <a href="#third-parties">Third parties</a>.</li>
+      </ul>
+      <p>These describe how the service is designed. No system is perfectly secure, and we can't promise that it will always work as intended.</p>
+
+      <h2>2. What we collect</h2>
+      <p>Our relay holds what it needs to sign you in, deliver data and limit abuse:</p>
+      <ul>
+        <li><strong>Email address.</strong> Used to sign you in with a one-time code, to deliver invitations you send or receive, and to contact you about your account. Hearth Cmd's emails come from <code>hearth@sourcecmd.com</code>. When someone invites an address to a household, the relay keeps that address and which keep it's for until the invitation is accepted, withdrawn or expires.</li>
+        <li><strong>Account and device identifiers.</strong> Random identifiers for your account and for each app install you sign in from, the public keys your devices use, which app each install is, and the day an account or device was last active.</li>
+        <li><strong>Device checks.</strong> The app uses Apple's App Attest and DeviceCheck so the relay can check it's talking to a genuine install, typically when you sign in, invite someone or link a device (not on each message). DeviceCheck may also be used to keep a ban in place if the app is reinstalled on the same phone.</li>
+        <li><strong>Push notification tokens.</strong> A token from Apple for each device, used to deliver notifications. Notification contents are generally encrypted on the sending side so that only your device can show them.</li>
+        <li><strong>Your keep's registration.</strong> That you run a keep, its public key, its software version, and when it was last seen. If you turn on health reports, your keep also sends content-free diagnostics (such as version, uptime and error counts by type).</li>
+        <li><strong>Who may reach which keep.</strong> Your keep tells the relay which accounts may connect to it, so the relay can route members' apps to it. The relay isn't told your household's name or its members' names.</li>
+        <li><strong>Encrypted data held for delivery.</strong> When a device or your keep is offline, the relay holds encrypted data until it can be delivered: messages between apps and keeps for up to about 7 days, and household chat messages and attachments for up to about 30 days. The relay can see the size of each item (padded so sizes reveal less), when it was sent, which account sent it, and who belongs to each conversation, but it is designed not to be able to read the contents.</li>
+        <li><strong>Delivery traces.</strong> Identifiers, outcomes, sizes and timings of deliveries, kept for 14 days so we can answer "why didn't this arrive?".</li>
+        <li><strong>Abuse controls.</strong> To limit spam, the relay keeps daily counts for each account of first contacts made, and how many were accepted, declined or blocked, for up to about 90 days, and uses them to limit how many new contacts an account can make.</li>
+        <li><strong>Logs.</strong> Our servers keep operational logs for a limited period. They are designed to hold identifiers, types, timings and error codes, not the contents of your messages, and our web server's logs are designed to leave out IP addresses.</li>
       </ul>
 
-      <h2>2. What We Don't Collect</h2>
+      <h2>3. What stays on your devices and your keep</h2>
       <ul>
-        <li>We don't collect your Apple ID, Google account credentials, or advertising identifiers.</li>
-        <li>We don't collect usage analytics, telemetry, or behavioral tracking beyond what's described above.</li>
-        <li>We don't use cookies or tracking scripts in the app. The website uses Google Analytics for aggregate traffic statistics; the app does not.</li>
-        <li>We don't access files, source code, or any other data on your computer beyond what appears in the permission requests your agents generate.</li>
-        <li>Agent activity stream data (tool calls, command output, file edits) is not stored on our servers — only chat room messages are persisted.</li>
-        <li>Google user data (calendar events, Drive files, contacts) is passed directly to the agent on your computer. It is not stored on our servers after the API call completes.</li>
-        <li>We never use Google user data to train models, serve ads, or for any purpose beyond completing the specific action the agent requested.</li>
-        <li>We never receive or store audio recordings from voice input. Wake-word detection and speech-to-text happen locally, on hardware in your home; only text reaches us.</li>
-        <li>We have no human-review pipeline for voice or agent data, and Hearth does not use your voice text, chat messages, or agent activity to train machine-learning models.</li>
+        <li><strong>Display names</strong>, household and room names, and the contents of messages and files are kept on your devices and your keep, and travel through the relay only in encrypted form.</li>
+        <li><strong>Agents' work:</strong> their conversations, memory, files and the actions they ask to take are on your keep.</li>
+        <li><strong>Connected accounts</strong> (for example, a calendar): your keep holds the tokens and talks to the provider itself. Our servers may pass along a code while you connect an account, which is designed to be useless without a secret held on your keep.</li>
+        <li><strong>Voice and screens.</strong> A Home Assistant voice device or a wall display you pair talks to your keep over your own network. We don't receive audio. The text of what's said to an agent becomes part of that agent's conversation, which goes to its model provider.</li>
+      </ul>
+      <p>Because this data is on hardware you control, keeping it safe, backed up or deleted is generally up to you. If you lose your devices and your keep's recovery key, we may not be able to help you recover it.</p>
+
+      <h2 id="third-parties">4. Third parties</h2>
+      <p>We don't sell your information, and the app is designed without advertising, third-party analytics or tracking. Information reaches others in these ways:</p>
+      <ul>
+        <li><strong>AI model providers you choose.</strong> Your agents send their work to the providers you set up, under your own accounts and their terms. Whether a provider keeps or trains on that content depends on your arrangement with them, not on us.</li>
+        <li><strong>Service providers who help us run the relay:</strong> currently Akamai (Linode) for servers and file storage, Brevo for sending email (your address and sign-in codes), and Apple for push notifications (push tokens and encrypted notification contents) and for device checks (App Attest and DeviceCheck).</li>
+        <li><strong>Services you connect.</strong> If you connect an account such as a calendar, your keep exchanges data with that service directly, under your account with it.</li>
+        <li><strong>When required.</strong> We may disclose information we hold if we believe the law requires it, or to protect people's safety or the service. What we hold is limited to what this policy describes.</li>
       </ul>
 
-      <h2>3. How We Use Your Data</h2>
-      <p>All data is used solely to operate the Service:</p>
+      <h2>5. How long things are kept</h2>
       <ul>
-        <li>Authenticating you and keeping your sign-in active across devices.</li>
-        <li>Routing permission requests from your agents to your phone and to other approved household members.</li>
-        <li>Sending push notifications when agents need a decision.</li>
-        <li>Evaluating always-allow rules to automatically approve matching requests.</li>
-        <li>Sending and tracking household invitations.</li>
-        <li>Verifying paid subscription status, if you purchase paid features.</li>
-        <li>Making Google API calls on behalf of your agents when you've connected a Google account.</li>
-        <li>Routing voice utterances from a connected voice assistant to the agent you've designated, and relaying the agent's spoken responses back through the Hearth software on your computer.</li>
-      </ul>
-      <p>We do not sell your data. We share it only with: (a) Apple APNs and Google FCM for push notification delivery; (b) Apple and Google for subscription verification, if you purchase paid features; (c) our email provider for OTP and invitation delivery; and (d) Google APIs when completing agent actions you've authorized.</p>
-      <p>Our use of Google API Services adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
-
-      <h2>4. Data Storage and Security</h2>
-      <ul>
-        <li>Your device credentials are stored in your platform's secure storage (iCloud Keychain or Android Keystore), encrypted by Apple or Google respectively.</li>
-        <li>Account data, household configuration, always-allow rules, push tokens, and subscription records are stored in a database on servers we operate.</li>
-        <li>OTPs are stored as SHA-256 hashes and expire quickly after issue.</li>
-        <li>All communication uses TLS (HTTPS/WSS).</li>
-        <li>Permission request logs are rotated and may be archived to cold storage indefinitely for audit purposes.</li>
-        <li>Google OAuth refresh tokens are encrypted at rest (X25519 + ChaCha20-Poly1305, keyed to your computer's public key) and can only be decrypted by the Hearth daemon on that computer.</li>
+        <li>Your email address, identifiers and keep registration: while your account exists.</li>
+        <li>Invitations: until accepted, withdrawn or expired.</li>
+        <li>Sign-in codes: typically removed a day after they expire. Sign-in sessions: removed when they expire.</li>
+        <li>Abuse counts: up to about 90 days.</li>
+        <li>Encrypted data waiting for delivery: up to about 7 days (between apps and keeps) or about 30 days (household chat and attachments).</li>
+        <li>Delivery traces: 14 days.</li>
+        <li>Logs: for a limited period, generally up to about 7 days for our web server and about 14 days for system logs.</li>
+        <li>Backups of the relay's database: generally up to about 30 days.</li>
+        <li>Your keep's data: on your computer, for as long as you keep it there.</li>
       </ul>
 
-      <h2>5. Data Retention</h2>
-      <p>Account records, household data, always-allow rules, and subscription records are kept while your account is active. Permission request logs may be retained indefinitely in pseudonymous form for audit purposes. You can delete your account at any time from within the app (see <a href="#delete-account">Account Deletion</a>). Archived log entries may remain in pseudonymous form (UUID only).</p>
+      <h2 id="delete-account">6. Deleting your account</h2>
+      <p>In Hearth Cmd, open the <strong>Account</strong> tab and tap <strong>Delete account</strong>, then confirm with a code sent to your email address. You can also ask us to delete it by emailing <a href="mailto:support@vergelabs.org">support@vergelabs.org</a> from the address you sign in with. Deleting your account removes it from the relay: your email address, devices and push tokens, and any data waiting to be delivered to you.</p>
+      <p><strong>Your keep isn't deleted with your account.</strong> It and its data stay on your computer until you remove them there. Messages you sent remain on the devices of the people who received them. Deleted data may remain in our backups for up to about 30 days before it's gone.</p>
 
-      <h2>6. Children's Privacy</h2>
-      <p>Hearth is not intended for children under 13. We do not knowingly collect data from children under 13. If you believe we have, please contact us and we will delete it promptly.</p>
-      <p>If you connect a voice assistant to Hearth, be aware that anyone who speaks to it &mdash; including children &mdash; will have the text of their speech routed to an agent. Because voice input is not tied to an individual account, we cannot distinguish a child's speech from an adult's. A household that places a shared voice device in a common area is responsible for who has access to it. As with all voice input, we store no audio and no server-side transcript.</p>
+      <h2>7. Children</h2>
+      <p>Hearth Cmd is not intended for anyone under 13, or under the minimum age where they live if that is higher. We don't knowingly collect information from children under that age. If you believe a child has signed up, contact us and we'll take steps to remove their account.</p>
 
-      <h2>7. Your Rights</h2>
-      <p>Depending on where you live, you may have the right to access, correct, or delete your personal data, or to object to how we process it. To exercise any of these rights, email <a href="mailto:support@vergelabs.org">support@vergelabs.org</a>. We'll respond in accordance with applicable law.</p>
+      <h2>8. Your choices and rights</h2>
+      <p>You can delete your account at any time (see <a href="#delete-account">above</a>). Depending on where you live, you may have rights to access, correct or delete information we hold about you, or to object to how it's used. To ask, contact us at the address below. Much of your information is on your own devices and keep, where you can view and remove it yourself.</p>
 
-      <h2>8. Changes to This Policy</h2>
-      <p>We may update this policy. Changes will be posted here with an updated date. For material changes we'll make reasonable efforts to notify you. Continued use of the Service after changes take effect constitutes acceptance.</p>
+      <h2>9. This website</h2>
+      <p>This website is hosted on GitHub Pages, which may log visits under GitHub's own privacy statement. Some pages use Google Analytics to count visits in aggregate. The Hearth Cmd app doesn't include it.</p>
 
-      <h2>9. Contact</h2>
-      <p>Questions about your data or this policy? Email <a href="mailto:support@vergelabs.org">support@vergelabs.org</a>.</p>
+      <h2>10. Changes to this policy</h2>
+      <p>We may update this policy as the service changes. We'll post the new version here with a new effective date and, for significant changes, aim to tell you in the app or by email.</p>
 
-      <h2>10. Google API Services</h2>
-      <p>This section describes how we handle data from Google Calendar, Google Drive, and Google Contacts (People API) if you connect a Google account.</p>
-
-      <h3>What we access</h3>
-      <ul>
-        <li><strong>Google Calendar</strong> (<code>calendar.events</code>): Event titles, times, attendees, descriptions, and locations in calendars you've shared access to.</li>
-        <li><strong>Google Drive</strong> (<code>drive.file</code>): Files created by Hearth or explicitly opened through Hearth, including names, metadata, and content.</li>
-        <li><strong>Google People / Contacts</strong> (<code>contacts.readonly</code>): Contact names, email addresses, phone numbers, and job information from your Google Contacts or Workspace directory.</li>
-      </ul>
-
-      <h3>How we use it</h3>
-      <p>Google data is accessed only to complete the specific action your agent is attempting at that moment &mdash; for example, checking your calendar before scheduling a meeting, or finding a contact's email address. The data goes directly to the agent running on your computer and is never stored on our servers after the API call finishes.</p>
-
-      <h3>What we never do with Google data</h3>
-      <ul>
-        <li>Store Google Calendar, Drive, or People data on our servers.</li>
-        <li>Use it to train machine learning models.</li>
-        <li>Use it for advertising or share it with ad networks.</li>
-        <li>Share it with anyone except as needed to complete the API call itself.</li>
-        <li>Use it for any purpose other than what you asked the agent to do.</li>
-      </ul>
-
-      <h3>Revoking access</h3>
-      <p>You can disconnect any Google integration at any time from the app. This deletes the stored refresh token from our server immediately. You can also revoke access directly in your Google account security settings at <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a>.</p>
-
-      <p>Our practices comply with the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
-
-      <h2 id="voice">11. Voice and Home Assistant</h2>
-      <p>Hearth can connect to a voice assistant &mdash; typically a <a href="https://www.home-assistant.io/" target="_blank" rel="noopener">Home Assistant</a> voice satellite (a "puck" or smart speaker) in your home &mdash; so you can speak to your agents and hear them respond. This section explains how that works and what it means for your privacy.</p>
-
-      <h3>What is captured, and where</h3>
-      <p>Capture is triggered by a wake word running on the voice hardware in your home, not by us. Both the wake word and the conversion of speech to text happen <strong>locally, on that hardware</strong>. We never receive an audio recording. What leaves your home is the <em>text</em> of what was said, which is routed to the agent you've designated.</p>
-
-      <h3>What we retain</h3>
-      <p>Voice text is routed to an agent rather than posted into a chat room, so &mdash; unlike chat messages &mdash; it is not written to our database as a stored message. It streams through our relay in memory the same way an agent's live activity does. The durable record of the conversation is the agent transcript on your own computer. Voice-activity timestamps can indicate when people are home or awake; we treat this the same as other agent activity and do not use it for profiling.</p>
-
-      <h3>Your Home Assistant credential stays on your computer</h3>
-      <p>When an agent speaks a response, that response is delivered to your Home Assistant by the Hearth software running on your own computer, over your local network &mdash; <strong>not</strong> by our servers. The credential that authorizes it is encrypted to your computer's public key (X25519 + ChaCha20-Poly1305) and can only be decrypted there. Our relay never holds your Home Assistant credential and never contacts your Home Assistant. The list of which rooms have voice devices is configuration you create; treat it as you would a sketch of your home's layout.</p>
-
-      <h3>People who aren't account holders</h3>
-      <p>A shared voice device can be spoken to by anyone in the room &mdash; a guest, a visitor, a household member without a Hearth account. When that happens, the text of what they say is routed to an agent, the same as any other utterance. Because it isn't tied to an individual account, this text is not attributed to a person and cannot be looked up or deleted on a per-person basis; as with all voice input, we store no audio and no server-side transcript of it. A household that installs a listening device in a shared space is making that choice on behalf of everyone who enters. If this matters for your household, don't connect a shared voice device, or place it where only intended users can reach it.</p>
-
-      <h3>Training and third parties</h3>
-      <p>Hearth does not use your voice text to train machine-learning models and has no human-review pipeline for it. Your voice text does become part of your agent's conversation with whatever model provider that agent uses (for example, Anthropic or OpenAI), under the account and terms <em>you</em> configured with that provider &mdash; so whether that provider retains or trains on it is governed by your own arrangement with them, not by Hearth.</p>
-
-      <h2 id="delete-account">12. Account Deletion</h2>
-      <p>You can request deletion of your Hearth account and all associated personal data at any time.</p>
-
-      <h3>How to delete your account</h3>
-      <p>Open the Hearth app, go to the <strong>Account</strong> tab, scroll to the bottom, and tap <strong>Delete Account</strong>. You'll see a summary of any households that will be deleted, then be asked to confirm with a one-time code sent to your email address. Deletion is immediate and permanent.</p>
-
-      <h3>What gets deleted</h3>
-      <ul>
-        <li>Your user record (email address, display name, account identifiers).</li>
-        <li>All household memberships and all households you own (including any that have other members).</li>
-        <li>All enrolled device registrations (your app sessions and computer enrollments).</li>
-        <li>All agent configurations, working directories, and always-allow rules associated with your account.</li>
-        <li>Your push notification tokens.</li>
-        <li>Any stored Google OAuth refresh tokens for integrations you connected.</li>
-        <li>Pending household invitations you sent or received.</li>
-        <li>Pro subscription records tied to your account.</li>
-      </ul>
-
-      <h3>What may be retained</h3>
-      <p>Permission request log entries may remain in pseudonymous form (UUID only, no email or name) for audit and legal compliance purposes. Messages in households you owned are deleted immediately. Messages you sent in other households are marked as removed from active views and remain in the database in that form.</p>
-
+      <h2>11. Contact</h2>
+      <p>Questions about this policy or your information? Email <a href="mailto:support@vergelabs.org">support@vergelabs.org</a>.</p>
     </div>
   </div>
 
@@ -187,7 +121,7 @@
         <a href="support.html">Support</a>
         <a href="mailto:support@vergelabs.org">Contact</a>
       </div>
-      <p class="copyright">&copy; 2025&ndash;2026 Verge Labs. All rights reserved.</p>
+      <p class="copyright">&copy; 2025&ndash;2026 Verge Labs LLC. All rights reserved.</p>
     </div>
   </footer>
 </body>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Support - Hearth</title>
-  <meta name="description" content="Troubleshooting and support for Hearth.">
+  <title>Support - Hearth Cmd</title>
+  <meta name="description" content="Help and support for Hearth Cmd.">
   <link rel="icon" type="image/svg+xml" href="hearthcmd.svg">
   <link rel="apple-touch-icon" href="hearthcmd-180.png">
   <link rel="stylesheet" href="style.css">
@@ -26,7 +26,6 @@
       </a>
       <div class="nav-links">
         <a href="/">Home</a>
-        <a href="guide.html">Get Started</a>
       </div>
     </div>
   </nav>
@@ -35,76 +34,52 @@
     <div class="container">
       <h1>Support</h1>
 
-      <p>For setup and how-to walkthroughs, see the <a href="guide.html">getting started guide</a>. This page covers common problems and how to fix them.</p>
+      <p>Hearth Cmd runs your household's agents on your <strong>keep</strong>: the Keep Cmd software on a computer you own. Most problems come down to whether the keep is running and reachable. This page covers the common ones.</p>
 
       <h2 id="troubleshooting">Troubleshooting</h2>
 
-      <h3>My computer isn't showing up in the app</h3>
+      <h3>The app says my keep is offline</h3>
       <ul>
-        <li>Make sure the Hearth daemon is running on that computer:</li>
+        <li>Check that the keep is running on its computer:</li>
       </ul>
-      <pre><code>hearth host status</code></pre>
+      <pre><code>keepcmd status</code></pre>
       <ul>
-        <li>If it's not running, start it:</li>
+        <li>If it isn't, start it:</li>
       </ul>
-      <pre><code>hearth host start</code></pre>
+      <pre><code>keepcmd start</code></pre>
       <ul>
-        <li>Confirm you signed in to the same email address on both the computer (<code>hearth login</code>) and the app.</li>
-        <li>Check your internet connection on both devices.</li>
+        <li>Check that the computer is on, awake and connected to the internet. While the keep is offline, the app may show your household read-only, from the last data it saw.</li>
+        <li>The keep's log is at <code>~/.keepcmd/daemon.log</code> on that computer. It's designed to hold identifiers and error codes, not your content.</li>
       </ul>
 
       <h3>An agent won't start</h3>
       <ul>
-        <li>Confirm the daemon is running:</li>
-      </ul>
-      <pre><code>hearth host status</code></pre>
-      <ul>
-        <li>Make sure the AI software the agent uses (e.g. Claude) is installed on the computer and working. Try running it directly from the terminal to confirm.</li>
-        <li>The daemon log path is shown in the output of <code>hearth host status</code> &mdash; check it for error messages.</li>
+        <li>Make sure the keep is running (<code>keepcmd status</code>).</li>
+        <li>Make sure the AI software the agent uses (for example, Claude Code) is installed and signed in on the keep's computer. Try running it directly in a terminal.</li>
+        <li>Check the keep's log for errors.</li>
       </ul>
 
-      <h3>I'm not getting push notifications</h3>
+      <h3>An agent keeps asking for the same thing</h3>
       <ul>
-        <li>Push notifications are free &mdash; no subscription needed.</li>
-        <li>On your iPhone, go to <strong>Settings &rarr; Hearth &rarr; Notifications</strong> and confirm notifications are enabled.</li>
-        <li>If you use Focus modes, add Hearth to the allowed apps list, or enable Time Sensitive notifications for Hearth so critical alerts get through.</li>
-        <li>If the Hearth app is open on your screen, requests arrive silently via the app connection &mdash; push notifications are only sent when the app is in the background.</li>
+        <li>Tap <strong>Always allow</strong> instead of Allow to make a rule, so matching requests go ahead without asking. Network access for agents is closed by default and builds up this way.</li>
       </ul>
 
-      <h3>The agent keeps asking for the same permissions</h3>
+      <h3>I'm not getting notifications</h3>
       <ul>
-        <li>Tap <strong>Always Allow</strong> instead of just Allow. This creates a rule so that type of action is approved automatically in the future.</li>
-        <li>Check the <strong>Grants</strong> tab for that agent to see existing rules and confirm they're set up correctly.</li>
+        <li>On your iPhone, open <strong>Settings &rarr; Hearth Cmd &rarr; Notifications</strong> and check that notifications are allowed.</li>
+        <li>If you use a Focus mode, allow Hearth Cmd in it.</li>
       </ul>
 
-      <h3>A request timed out</h3>
+      <h3>I got a new phone</h3>
       <ul>
-        <li>Requests time out after about 10 minutes if no response is received. The agent will not proceed &mdash; the action is denied by default on timeout.</li>
-        <li>If you're missing requests, make sure push notifications are enabled, or keep the app open in the foreground while agents are running.</li>
+        <li>Sign in on the new phone with the same email address, and link it from a device you already have when the app asks.</li>
       </ul>
 
-      <h3>The daemon stops when I restart my computer</h3>
-      <ul>
-        <li>The Hearth daemon does not start automatically on reboot. Run this after restarting:</li>
-      </ul>
-      <pre><code>hearth host start</code></pre>
-      <ul>
-        <li>To have it start automatically, add <code>hearth host start</code> to your shell profile, or set up a launchd (Mac) or systemd (Linux) user service.</li>
-      </ul>
-
-      <h3>Talk to Agent isn't available</h3>
-      <ul>
-        <li>Talk to Agent is free and available to everyone. If it's not showing, make sure the app is up to date and the agent's host is connected.</li>
-      </ul>
-
-      <h3>Voice input isn't showing up</h3>
-      <ul>
-        <li>Voice input is free. It requires iPhone 12 or later and English as your device language.</li>
-        <li>If it's still not showing, force-quit and relaunch the app.</li>
-      </ul>
+      <h2 id="delete-account">Deleting your account</h2>
+      <p>Open the <strong>Account</strong> tab and tap <strong>Delete account</strong>, or email <a href="mailto:support@vergelabs.org">support@vergelabs.org</a> from the address you sign in with. Your keep and its data stay on your computer; remove them there if you want them gone. See the <a href="privacy.html#delete-account">Privacy Policy</a> for what's deleted.</p>
 
       <h2>Contact</h2>
-      <p>Can't find your answer here? Email <a href="mailto:support@vergelabs.org">support@vergelabs.org</a> and we'll get back to you.</p>
+      <p>Can't find your answer here, or want to report abuse? Email <a href="mailto:support@vergelabs.org">support@vergelabs.org</a>. Please don't send message contents, keys or recovery words: we don't need them to help.</p>
     </div>
   </div>
 
@@ -136,7 +111,7 @@
         <a href="support.html">Support</a>
         <a href="mailto:support@vergelabs.org">Contact</a>
       </div>
-      <p class="copyright">&copy; 2025&ndash;2026 Verge Labs. All rights reserved.</p>
+      <p class="copyright">&copy; 2025&ndash;2026 Verge Labs LLC. All rights reserved.</p>
     </div>
   </footer>
 </body>
