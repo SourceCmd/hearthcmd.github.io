@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Support - Hearth</title>
-  <meta name="description" content="Troubleshooting and support for Hearth.">
+  <title>Support - Hearth Cmd</title>
+  <meta name="description" content="Help and support for Hearth Cmd.">
   <link rel="icon" type="image/svg+xml" href="hearthcmd.svg">
   <link rel="apple-touch-icon" href="hearthcmd-180.png">
   <link rel="stylesheet" href="style.css">
@@ -21,12 +21,12 @@
   <nav>
     <div class="container">
       <a href="/" class="brand">
-        <img src="hearthcmd.svg" alt="Hearth logo">
-        Hearth
+        <img src="hearthcmd.svg" alt="">
+        Hearth Cmd
       </a>
       <div class="nav-links">
         <a href="/">Home</a>
-        <a href="guide.html">Get Started</a>
+        <a href="support.html">Support</a>
       </div>
     </div>
   </nav>
@@ -35,76 +35,74 @@
     <div class="container">
       <h1>Support</h1>
 
-      <p>For setup and how-to walkthroughs, see the <a href="guide.html">getting started guide</a>. This page covers common problems and how to fix them.</p>
+      <p>Hearth Cmd runs your household's agents on your <strong>Keep</strong>: the Keep Cmd software on a computer you own. Most problems come down to whether the Keep is running and reachable. This page covers the common ones. Using Hearth Cmd Classic? See <a href="#classic">below</a>.</p>
 
-      <h2 id="troubleshooting">Troubleshooting</h2>
+      <h2>Getting started</h2>
+      <ul>
+        <li><strong>Connecting to your Keep.</strong> On your Keep's computer, run <code>keepcmd hub pair --app hearth</code> to show a pairing code. With your phone on the same Wi-Fi, choose <strong>Use on your home network only</strong> in Hearth Cmd and scan it, or paste its link. No account is needed.</li>
+        <li><strong>Signing in.</strong> To use Hearth Cmd away from home, join a household or invite people, sign in with your email address or phone number, at the start or later in <strong>Account &rarr; Away from Home</strong>. If Loop Cmd is signed in on the same phone, Hearth Cmd offers to continue as that account with one tap.</li>
+        <li><strong>Joining a household.</strong> If someone invited you, sign in with the email address or phone number they used, and accept the invitation. Then wait for the person who invited you to let you in: their phone shows a code, so check it matches the one on yours.</li>
+      </ul>
 
-      <h3>My computer isn't showing up in the app</h3>
+      <h2 id="troubleshooting">Common questions</h2>
+
+      <h3>The app says my Keep is offline</h3>
       <ul>
-        <li>Make sure the Hearth daemon is running on that computer:</li>
+        <li>Check that the Keep is running on its computer:</li>
       </ul>
-      <pre><code>hearth host status</code></pre>
+      <pre><code>keepcmd status</code></pre>
       <ul>
-        <li>If it's not running, start it:</li>
+        <li>If it isn't, start it:</li>
       </ul>
-      <pre><code>hearth host start</code></pre>
+      <pre><code>keepcmd start</code></pre>
       <ul>
-        <li>Confirm you signed in to the same email address on both the computer (<code>hearth login</code>) and the app.</li>
-        <li>Check your internet connection on both devices.</li>
+        <li>Check that the computer is on, awake and connected to your network. If you use Hearth Cmd on your home network only, your phone needs to be on the same network as the Keep.</li>
+        <li>The Keep's log is at <code>~/.keepcmd/daemon.log</code> on that computer. It's designed to hold identifiers and error codes, not your content.</li>
+      </ul>
+
+      <h3>Household chat says it needs Away from Home</h3>
+      <ul>
+        <li>Household rooms travel through our relay, end-to-end encrypted. Sign this phone in from <strong>Account &rarr; Away from Home</strong>.</li>
       </ul>
 
       <h3>An agent won't start</h3>
       <ul>
-        <li>Confirm the daemon is running:</li>
-      </ul>
-      <pre><code>hearth host status</code></pre>
-      <ul>
-        <li>Make sure the AI software the agent uses (e.g. Claude) is installed on the computer and working. Try running it directly from the terminal to confirm.</li>
-        <li>The daemon log path is shown in the output of <code>hearth host status</code> &mdash; check it for error messages.</li>
+        <li>Make sure the Keep is running (<code>keepcmd status</code>).</li>
+        <li>Make sure the AI software the agent uses (for example, Claude Code) is installed and signed in on the Keep's computer. Try running it directly in a terminal.</li>
+        <li>Check the Keep's log for errors.</li>
       </ul>
 
-      <h3>I'm not getting push notifications</h3>
+      <h3>An agent keeps asking for the same thing</h3>
       <ul>
-        <li>Push notifications are free &mdash; no subscription needed.</li>
-        <li>On your iPhone, go to <strong>Settings &rarr; Hearth &rarr; Notifications</strong> and confirm notifications are enabled.</li>
-        <li>If you use Focus modes, add Hearth to the allowed apps list, or enable Time Sensitive notifications for Hearth so critical alerts get through.</li>
-        <li>If the Hearth app is open on your screen, requests arrive silently via the app connection &mdash; push notifications are only sent when the app is in the background.</li>
+        <li>Tap <strong>Always allow</strong> instead of Allow to make a rule, so matching requests go ahead without asking. Network access for agents is closed by default and builds up this way.</li>
       </ul>
 
-      <h3>The agent keeps asking for the same permissions</h3>
+      <h3>I'm not getting notifications</h3>
       <ul>
-        <li>Tap <strong>Always Allow</strong> instead of just Allow. This creates a rule so that type of action is approved automatically in the future.</li>
-        <li>Check the <strong>Grants</strong> tab for that agent to see existing rules and confirm they're set up correctly.</li>
+        <li>Notifications need this phone to be signed in (<strong>Account &rarr; Away from Home</strong>).</li>
+        <li>On iPhone, open <strong>Settings &rarr; Hearth Cmd &rarr; Notifications</strong> and check that notifications are allowed. If you use a Focus mode, allow Hearth Cmd in it.</li>
+        <li>On Android, open <strong>Settings &rarr; Apps &rarr; Hearth Cmd &rarr; Notifications</strong> and check that they're on. If you use Do Not Disturb, allow Hearth Cmd in it. Some phones also limit apps in the background to save battery: let Hearth Cmd run unrestricted.</li>
       </ul>
 
-      <h3>A request timed out</h3>
+      <h3>Dictation isn't working</h3>
       <ul>
-        <li>Requests time out after about 10 minutes if no response is received. The agent will not proceed &mdash; the action is denied by default on timeout.</li>
-        <li>If you're missing requests, make sure push notifications are enabled, or keep the app open in the foreground while agents are running.</li>
+        <li>On iPhone, the first time you dictate, the app downloads its speech model; give it a moment on a good connection.</li>
+        <li>On Android, dictation uses your phone's speech recognition. If the app says it's preparing, the phone is downloading its on-device speech model. Check that a speech recognition service is installed and enabled in your phone's settings.</li>
       </ul>
 
-      <h3>The daemon stops when I restart my computer</h3>
+      <h3>I got a new phone</h3>
       <ul>
-        <li>The Hearth daemon does not start automatically on reboot. Run this after restarting:</li>
-      </ul>
-      <pre><code>hearth host start</code></pre>
-      <ul>
-        <li>To have it start automatically, add <code>hearth host start</code> to your shell profile, or set up a launchd (Mac) or systemd (Linux) user service.</li>
+        <li>Pair the new phone with your Keep again, or sign in with the same email address or phone number and approve it from a device you already have when the app asks.</li>
       </ul>
 
-      <h3>Talk to Agent isn't available</h3>
-      <ul>
-        <li>Talk to Agent is free and available to everyone. If it's not showing, make sure the app is up to date and the agent's host is connected.</li>
-      </ul>
+      <h2 id="delete-account">Deleting your account</h2>
+      <p>Open <strong>Account &rarr; Delete account</strong>, and confirm with the code we send you. No longer have the app? See <a href="https://loopcmd.com/delete-account">Delete your account</a> for how to ask by email, and for what's deleted and what's kept. Your Keep and its data stay on your computer; run <code>keepcmd uninstall</code> there if you want them gone. See the <a href="privacy.html#delete-account">Privacy Policy</a> for details.</p>
 
-      <h3>Voice input isn't showing up</h3>
-      <ul>
-        <li>Voice input is free. It requires iPhone 12 or later and English as your device language.</li>
-        <li>If it's still not showing, force-quit and relaunch the app.</li>
-      </ul>
+      <h2 id="classic">Hearth Cmd Classic</h2>
+      <p>Hearth Cmd Classic is the earlier Hearth app. It's a separate app with its own account, and its data doesn't move to Hearth Cmd. For help with it, see the <a href="classic/support.html">Classic support page</a>, its <a href="classic/privacy.html">privacy policy</a> and <a href="classic/terms.html">terms</a>.</p>
 
       <h2>Contact</h2>
-      <p>Can't find your answer here? Email <a href="mailto:support@vergelabs.org">support@vergelabs.org</a> and we'll get back to you.</p>
+      <p>Can't find your answer here, or want to report abuse? Email <a href="mailto:support@vergelabs.org">support@vergelabs.org</a>. Please don't send message contents, keys or recovery words: we don't need them to help.</p>
     </div>
   </div>
 
@@ -134,9 +132,10 @@
         <a href="privacy.html">Privacy Policy</a>
         <a href="terms.html">Terms of Service</a>
         <a href="support.html">Support</a>
+        <a href="https://loopcmd.com/delete-account">Delete account</a>
         <a href="mailto:support@vergelabs.org">Contact</a>
       </div>
-      <p class="copyright">&copy; 2025&ndash;2026 Verge Labs. All rights reserved.</p>
+      <p class="copyright">&copy; 2025&ndash;2026 Verge Labs LLC. All rights reserved.</p>
     </div>
   </footer>
 </body>
